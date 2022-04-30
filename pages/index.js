@@ -1,6 +1,31 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Form from '../components/Form'
+import Lists from '../components/Lists'
 
+const todo = [
+  {
+    id: 1,
+    title: 'Todo One',
+    desc: 'Lorem ipsum'
+  },
+  {
+    id: 2,
+    title: 'Todo Two',
+    desc: 'Lorem ipsum'
+  },
+  {
+    id: 3,
+    title: 'Todo Three',
+    desc: 'Lorem ipsum'
+  },
+  {
+    id: 4,
+    title: 'Todo Four',
+    desc: 'Lorem ipsum'
+  }
+
+]
 
 export default function Home() {
   return (
@@ -11,10 +36,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main >
-        <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <main className='w-[50%] m-auto'>
+        <h1 className='text-center m-10 text-indigo-500 font-bold text-4xl'>TODO APP</h1>
+        {/* === INPUT === */}
+        <Form />
+        {/* === List of todos */}
+        <Lists todo={todo} />
       </main>
     </div>
   )

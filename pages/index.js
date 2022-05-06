@@ -1,33 +1,24 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import Form from '../components/Form'
 import Lists from '../components/Lists'
-
-const todo = [
-  {
-    id: 1,
-    title: 'Todo One',
-    desc: 'Lorem ipsum'
-  },
-  {
-    id: 2,
-    title: 'Todo Two',
-    desc: 'Lorem ipsum'
-  },
-  {
-    id: 3,
-    title: 'Todo Three',
-    desc: 'Lorem ipsum'
-  },
-  {
-    id: 4,
-    title: 'Todo Four',
-    desc: 'Lorem ipsum'
-  }
-
-]
+import {v4 as uuidv4} from 'uuid'
 
 export default function Home() {
+
+  const [todos, setTodos] = useState([]);
+
+  const handleTodo = (todo) =>{
+    setTodos((prevTodo) => {
+      return[...prevTodo, {id:uuidv4() , ...todo} ]
+    })
+  }
+
+  const handleDelete = (id) =>{
+    const filteredTodos = todos.filter((todo)=> todo.id != id)
+    setTodos(filteredTodos)
+  }
   return (
     <div>
       <Head>
@@ -39,9 +30,9 @@ export default function Home() {
       <main className='w-[50%] m-auto'>
         <h1 className='text-center m-10 text-indigo-500 font-bold text-4xl'>TODO APP</h1>
         {/* === INPUT === */}
-        <Form />
+        <Form handleTodo={handleTodo} />
         {/* === List of todos */}
-        <Lists todo={todo} />
+        <Lists todos={todos} handleDelete={handleDelete} />
       </main>
     </div>
   )
